@@ -16,8 +16,6 @@ public class TestGaulois {
 
 		for (int i = 0; i < 3; i++) {
 			asterix.frapper(minus);
-			String chaine = minus.recevoirCoup(asterix.getForce()/3);
-			minus.parler(chaine);
 		}
 
 	}
