@@ -8,5 +8,10 @@ public class Soldat extends Romain{
 		super(nom, force); 
 		this.grade = garde; 
 	}
+	
+	@Override
+	public String donnerAuteur() {
+		return grade.toString();
+	}
 
 }

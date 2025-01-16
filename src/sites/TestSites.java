@@ -41,7 +41,7 @@ public class TestSites {
 		village.ajouterVillageois(prolix);
 		
 		camp.afficherCamp();
-		village.afficherVillageois(village);
+		village.afficherVillageois();
 	
 		Gaulois abraracourcix = new Gaulois("abraracourcix" , 5);
 		Soldat briseradius = new Soldat("Briseradius", 4, Grade.SOLDAT);
