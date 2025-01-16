@@ -5,7 +5,7 @@ public abstract class Personnage {
 	private String nom; 
 	private int force; 
 	
-	public Personnage(String nom, int force) {
+	protected Personnage(String nom, int force) {
 		this.nom = nom;
 		this.force = force;
 	}
@@ -18,12 +18,12 @@ public abstract class Personnage {
 		System.out.println("Le gaulois " + nom + " : \"" + chaine + "\".");
 	}
 	
-	public abstract String donnerAuteur(); 
+	protected abstract String donnerAuteur(); 
 
-	public void frapper(Romain romain) {
-		String nomRomain = romain.getNom();
-		System.out.println(nom + " envoie un grand coup dans la mâchoire de " + nomRomain);
-		romain.recevoirCoup(force/3);
+	public void frapper(Personnage adversaire) {
+		String nomAdversaire = adversaire.getNom();
+		System.out.println("Le " + donnerAuteur() + nom + " donne un grand coup au " + adversaire.donnerAuteur() + nomAdversaire);
+		adversaire.recevoirCoup(force/3);
 	}
 
 	
