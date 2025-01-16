@@ -15,7 +15,7 @@ public abstract class Personnage {
 	}
 
 	public void parler(String chaine) {
-		System.out.println("Le gaulois " + nom + " : \"" + chaine + "\".");
+		System.out.println("Le " + donnerAuteur() + nom + " : \"" + chaine + "\".");
 	}
 	
 	protected abstract String donnerAuteur(); 
