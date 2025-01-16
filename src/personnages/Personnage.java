@@ -15,15 +15,17 @@ public abstract class Personnage {
 	}
 
 	public void parler(String chaine) {
-		System.out.println("Le " + donnerAuteur() + nom + " : \"" + chaine + "\".");
+		System.out.println("Le " + donnerAuteur() + " " + nom + " : \"" + chaine + "\".");
 	}
 	
 	protected abstract String donnerAuteur(); 
 
 	public void frapper(Personnage adversaire) {
-		String nomAdversaire = adversaire.getNom();
-		System.out.println("Le " + donnerAuteur() + nom + " donne un grand coup au " + adversaire.donnerAuteur() + nomAdversaire);
-		adversaire.recevoirCoup(force/3);
+		if (force > 0) {
+			String nomAdversaire = adversaire.getNom();
+			System.out.println("Le " + donnerAuteur() + " " + nom + " donne un grand coup au " + adversaire.donnerAuteur() + nomAdversaire);
+			adversaire.recevoirCoup(force/3);
+		}
 	}
 
 	
