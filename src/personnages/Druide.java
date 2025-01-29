@@ -1,17 +1,18 @@
 package personnages;
 
-import utilitaires.Potion;
 import java.security.SecureRandom;
 import java.util.Random;
 
-public class Druide extends Personnage {
+import equipements.Potion;
 
-	private Potion[] potions = new Potion[100];
-	private int nombrePotions;
-	private Random random;
+public class Druide extends Gaulois {
+	private Potion[] stockPotions;
+	private int nombrePotions; // Pour garder une trace du nombre actuel de potions
+	private Random random; // Ajout de l'objet Random
 
 	public Druide(String nom, int force) {
 		super(nom, force);
+		stockPotions = new Potion[10]; // Initialisation avec une taille fixe de 10 potions max
 		nombrePotions = 0;
 		try {
 			random = SecureRandom.getInstanceStrong();
@@ -20,33 +21,41 @@ public class Druide extends Personnage {
 		}
 	}
 
-	@Override
-	public String donnerAuteur() {
-		return "Druide";
+	public void fabriquerPotion(int quantite) {
+		if (quantite + nombrePotions > stockPotions.length) {
+			augmenterTailleStock(quantite + nombrePotions - stockPotions.length);
+		}
+		int puissance = 2 + random.nextInt(5); // Génère une puissance aléatoire entre 2 et 6
+		for (int i = 0; i < quantite; i++) {
+
+			stockPotions[nombrePotions++] = new Potion(puissance);
+		}
+		this.parler("J'ai concocté " + quantite + " potions de puissance " + puissance);
 	}
 
-	public void fabriquerPotion(int quantite) {
-		for (int i = 0; i < quantite; i++) {
-			int puissance = 2 + random.nextInt(5);
-			nombrePotions++;
-			potions[nombrePotions] = new Potion(puissance);
+	private void augmenterTailleStock(int nombreNecessaire) {
+		int nouvelleTaille = stockPotions.length + nombreNecessaire;
+		Potion[] nouveauStock = new Potion[nouvelleTaille];
+		for (int i = 0; i < nombrePotions; i++) {
+			nouveauStock[i] = stockPotions[i];
 		}
-		parler("J'ai concocté " + quantite + " doses de potion magique. Elle a une force de "
-				+ potions[nombrePotions - 1].getPuissance());
+		stockPotions = nouveauStock;
 	}
 
 	public void donnerPotion(Gaulois gaulois) {
-		if ("Obelix".equals(gaulois.getNom())) {
-			parler("Non, Obélix Non !... Et tu le sais très bien !");
-		} else {
+		if ("Obélix".equals(gaulois.getNom())) {
+			this.parler("Non, Obélix Non !... Et tu le sais très bien !");
+			return;
+		}
 
-			if (nombrePotions > 0) {
-				Potion potion = potions[nombrePotions];
-				nombrePotions--;
-				gaulois.boirePotion(potion);
-			} else {
-				parler("Désolé " + gaulois.getNom() + " il n'y a plus une seule goutte de potion.");
-			}
+		if (nombrePotions > 0) {
+			Potion potion = stockPotions[0]; // Prend la première potion du stock
+			System.arraycopy(stockPotions, 1, stockPotions, 0, --nombrePotions); // Décale toutes les potions
+			stockPotions[nombrePotions] = null; // Décrémente le nombre de potions
+			gaulois.setPuissancePotion(potion.getPuissance()); // Met à jour la puissance du Gaulois
+			this.parler("donne une potion de puissance " + potion.getPuissance() + " à " + gaulois.getNom() + ".");
+		} else {
+			this.parler("Désolé " + gaulois.getNom() + " il n'y a plus une seule goutte de potion.");
 		}
 	}
 
