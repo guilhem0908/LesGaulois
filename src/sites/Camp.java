@@ -45,4 +45,12 @@ public class Camp {
 		}
 	}
 
+	public Soldat[] getArmeeRomaine() {
+		return armeeRomain;
+	}
+
+	public int getNbSoldats() {
+		return nbSoldat;
+	}
+
 }
