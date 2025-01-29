@@ -1,6 +1,6 @@
 package personnages;
 
-import equipements.Potion;
+import utilitaires.Potion;
 
 public class Gaulois extends Personnage {
 	private double puissancePotion = 1.0; // Puissance initiale sans potion

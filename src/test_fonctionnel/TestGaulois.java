@@ -6,6 +6,7 @@ import personnages.Grade;
 import personnages.Soldat;
 import sites.Camp;
 import sites.Village;
+import utilitaires.Equipement;
 
 public class TestGaulois {
 	public static void main(String[] args) {
@@ -32,9 +33,9 @@ public class TestGaulois {
 
 		// Creation de l'armée romaine
 		Soldat minus = new Soldat("Minus", 6, Grade.CENTURION);
-		minus.equiperBouclier();
-		minus.equiperCasque();
-		minus.equiperPlastron();
+		minus.equiperArmure(Equipement.BOUCLIER);
+		minus.equiperArmure(Equipement.CASQUE);
+		minus.equiperArmure(Equipement.PLASTRON);
 		Soldat brutus = new Soldat("Brutus", 5, Grade.CENTURION);
 		Soldat milexcus = new Soldat("Milexcus", 2, Grade.SOLDAT);
 		Soldat tulliusOctopus = new Soldat("Tullius Octopus", 2, Grade.TESSERARIUS);

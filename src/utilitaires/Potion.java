@@ -1,4 +1,4 @@
-package equipements;
+package utilitaires;
 
 public class Potion {
 	private int puissance;
